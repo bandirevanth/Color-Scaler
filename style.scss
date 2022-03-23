@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css?family=Space+Mono:700i,700');
+
+:root, input, textarea, select, button {
+  font-family: 'Space Mono', monospace;
+  font-size: .8rem;
+  font-weight: 700;
+}
+
+h1,h2 {
+  margin-top: 0;
+}
+:root {
+  padding: 1rem;
+}
+
+canvas {
+  display: block;
+}
+
+.list-group {
+  margin-top: .5em;
+}
+
+.list-group-item {
+  position: relative;
+  padding: .5em;
+  cursor: move;
+  border: 2px solid #202124;
+  background: #fff;
+  
+  & + & {
+    margin-top: -2px;
+  }
+  &::before {
+    content: "↕";
+    font-size: 1.5em;
+    margin-right: .25em;
+  }
+}
+
+.ghost {
+  background: #202124;
+  color: #fff;
+}
+
+.color-scale,
+.color-pie {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 2.5rem;
+  background: #202124;
+}
+
+.color-scale--cont {
+  right: 2.5rem;
+  width: calc(3.25rem + 15vmin);
+}
+
+.color-pie {
+  bottom: auto;
+  top: 2rem;
+  height: calc(30vmin - .5rem);
+  width: calc(30vmin - .5rem);
+  right: 6rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 .1rem #fff;
+  
+  
+  &::before {
+    opacity: 0;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 70%;
+    background: #fff;
+    transform: translate(-50%, -50%) scale(.5);
+    border-radius: 50%;
+    transition: 100ms opacity linear 100ms, 300ms transform cubic-bezier(.7,.3,0,1);
+  }
+  &:hover {
+    &::before {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+}
+
+.color-pie--grad {
+  top: calc(4rem + 30vmin);
+}
+
+legend {
+  background: white;
+  padding: 0 0.25em;
+  font-size: 1.25rem;
+  margin-left: -0.25em;
+}
+
+label {
+  padding-top: .5em;
+  display: block;
+  
+  span {
+    display: block;
+    margin-bottom: .25em;
+  }
+  input[type="checkbox"] + span {
+    display: inline-block;
+  }
+}
+
+input[type="color"] {
+  padding: 0;
+  
+  height: 1.4em;
+  width: 1.4em;
+
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: .05rem;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
+
+fieldset,
+textarea {
+  display: block;
+  width: 40vw;
+  margin-bottom: 1em;
+  border: 2px solid #202124;
+  padding: .75rem;
+}
