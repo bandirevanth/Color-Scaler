@@ -1,0 +1,72 @@
+<div id="app">
+  <h2>color scale thing</h2>
+  <form @submit.prevent>
+    <fieldset>
+      <legend>Options</legend>
+      <label>
+        <span>Inpterpolation Color Model</span>
+        <select v-model="currentSpace">
+        <option v-for="space in spaces">{{space}}</option>
+      </select>
+      </label>
+      <label>
+        <span>Amount of colors</span>
+        <input type="number" v-model="nbrOfColors" step="1" :min='min' max="1000"/>
+      </label>
+
+      <label>
+        <input type="checkbox" v-model="connectColors" />
+        <span>connect last and first color</span>
+      </label>
+      <label>
+        <span>Padding <i>{{padding}}</i></span>
+        <input type="range" min="-1" max="1" step="0.001" v-model="padding" />
+      </label>
+    </fieldset>
+ 
+    <fieldset>
+      <legend>Color</legend>
+      <div>
+        <input type="color" v-model="currentColor" />
+        <input type="text" v-model="currentColor" />
+        <button @click="addColor">Add Color</button>
+      </div>
+
+      <vuedraggable
+        :list="list"
+        class="list-group"
+        ghost-class="ghost"
+      >
+        <div
+          class="list-group-item"
+          v-for="element, i in list"
+          :key="element.value"
+          :style="{'--color': element.value}"
+        > 
+          <input type="color" :value="element.value" v-on:change="changeColor($event, i)" />
+          {{ element.value }}
+          <button aria-label="remove color" @click="removeMe(i)">×</button>
+        </div>
+      </vuedraggable>
+    </fieldset>
+       
+  </form>
+  
+  <div class="color-scale" :style="{'background': bgc}">
+  </div>
+  
+  <div class="color-scale color-scale--cont" :style="{'background': bglcc}">
+  </div>
+  
+  <div class="color-pie" :style="{'background': bgcc}">
+  </div>
+  <div class="color-pie color-pie--grad" :style="{'background': bgccc}">
+  </div>
+  <canvas ref="can" width="400" height="400">
+    
+  </canvas>
+  <label>
+    <span>Color Export</span>
+  <textarea>{{rawColors}}</textarea>
+  </label>
+</div>
